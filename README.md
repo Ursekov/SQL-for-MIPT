@@ -3,5 +3,5 @@ From the [Skillfactory Data Science course](https://skillfactory.ru/data-scienti
 
 ## Проекты
 
-* [Homework 1](https://github.com/Ursekov/MIPT_SF_DATA_SCIENCE/tree/main/Project%200)
-* [Homework 2](https://github.com/Ursekov/MIPT_SF_DATA_SCIENCE/tree/main/Project%200)
+* [Homework 1](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%201)
+* [Homework 2](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%202)
