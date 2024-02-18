@@ -1,0 +1,51 @@
+-- 1
+select distinct brand
+from transaction
+where standard_cost > 1500;
+
+
+-- 2
+select * from transaction
+where order_status = 'Approved' and to_date(transaction_date, 'dd/mm/yyyy') between '2017-04-01' and '2017-04-09'; 
+
+
+-- 3
+select distinct job_title from customer
+where job_industry_category in ('IT', 'Financial Services') and job_title like 'Senior%';
+
+
+-- 4
+SELECT distinct t.brand, c.job_industry_category FROM customer c
+INNER JOIN transaction t on c.customer_id = t.customer_id 
+where job_industry_category = 'Financial Services';
+
+
+-- 5
+SELECT c.customer_id, c.first_name, c.last_name, t.online_order, t.brand FROM customer c
+INNER JOIN transaction t on c.customer_id = t.customer_id 
+where online_order = 'True' and brand in ('Giant Bicycles', 'Norco Bicycles', 'Trek Bicycles')
+limit 10;
+
+
+-- 6
+select c.customer_id, c.first_name, c.last_name, t.transaction_id FROM customer c
+left join transaction t on c.customer_id = t.customer_id 
+where transaction_id is null;
+
+
+-- 7
+select c.customer_id, c.first_name, c.last_name, t.standard_cost, c.job_industry_category FROM customer c
+left join transaction t on c.customer_id = t.customer_id 
+where standard_cost = (
+	select max(t.standard_cost) FROM customer c
+	left join transaction t on c.customer_id = t.customer_id
+) 	and c.job_industry_category = 'IT'
+
+
+-- 8
+select distinct c.customer_id, c.first_name, c.last_name, c.job_industry_category, 
+		t.order_status, t.transaction_date::date FROM customer c
+left join transaction t on c.customer_id = t.customer_id 
+where t.order_status = 'Approved' 
+	and to_date(t.transaction_date, 'dd/mm/yyyy') between '2017-07-07' and '2017-07-17'
+	and job_industry_category in ('IT', 'Health');
