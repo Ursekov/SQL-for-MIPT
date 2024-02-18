@@ -72,10 +72,8 @@
 
 Данные были загружены с помощью функции import в программе DBeaver.
 
-:arrow_up:[к оглавлению](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%202#%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5)
-
 3. Вывод необходимой информации с помощью [SQL скриптов](https://github.com/Ursekov/SQL-for-MIPT/blob/master/Homework%202/SQL%20SELECT%20%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D1%8B%20%D0%A3%D1%80%D1%81%D0%B5%D0%BA%D0%BE%D0%B2%20%D0%90%D0%90.txt)
 
 *В задачах, где необходимо было вывести данные о клиентах, я выводил ID, имя, фамилию и необходимую категорию, поскольку этих данных достаточно, чтобы идентифицировать каждого клиента и проверить, правильно ли выполнен запрос.*
 
-
+:arrow_up:[к оглавлению](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%202#%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5)
