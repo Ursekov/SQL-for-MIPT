@@ -1,0 +1,111 @@
+-- 1
+select job_industry_category,
+	count(*) as count_person
+from customer
+group by job_industry_category 
+order by count_person desc;
+
+-- 2
+select c.job_industry_category,
+	date_trunc('month', t.transaction_date::date) as transac_date,
+	sum(t.list_price)
+from transaction t
+left join customer c on t.customer_id = c.customer_id 
+group by c.job_industry_category, transac_date
+order by transac_date, job_industry_category;
+
+-- 3
+select t.brand, count(t.online_order)
+from transaction t 
+left join customer c on t.customer_id = c.customer_id 
+where t.order_status = 'Approved' and t.online_order = 'True' and c.job_industry_category = 'IT'
+group by t.brand;
+
+
+-- 4.1
+select c.customer_id
+	,c.first_name
+	,c.last_name
+	,sum(t.list_price) as sum_transactions
+	,max(t.list_price) as max_transaction
+	,min(t.list_price) as min_transaction
+	,count(t.list_price) as count_transactions
+from customer c 
+inner join transaction t on c.customer_id = t.customer_id 
+group by c.customer_id
+order by sum_transactions desc, count_transactions desc;
+
+-- 4.2
+select c.customer_id
+	,c.first_name
+	,c.last_name
+	,sum(t.list_price) over (partition by c.customer_id) as sum_transactions
+	,max(t.list_price) over (partition by c.customer_id) as max_transaction
+	,min(t.list_price) over (partition by c.customer_id) as min_transaction
+	,count(t.list_price) over (partition by c.customer_id) as count_transactions
+from customer c 
+inner join transaction t on c.customer_id = t.customer_id
+order by sum_transactions desc, count_transactions desc;
+	
+	
+-- 5.1
+select distinct  
+	c.first_name
+	,c.last_name
+	,min(t.list_price) as min_list_price
+from customer c 
+inner join transaction t on c.customer_id = t.customer_id 
+where list_price = (select min(list_price) from transaction)
+group by c.first_name, c.last_name
+order by c.first_name, c.last_name;
+
+-- 5.2
+select 
+	c.first_name
+	,c.last_name
+	,max(t.list_price) as max_list_price
+from customer c 
+inner join transaction t on c.customer_id = t.customer_id
+where t.list_price = (select max(list_price) from transaction)
+group by c.first_name, c.last_name
+order by c.first_name, c.last_name;
+
+
+-- 6
+select distinct customer_id
+	,first_name
+	,last_name
+	,list_price 
+	,transaction_date
+	,first_transaction_date
+from(
+	select c.customer_id 
+		,c.first_name
+		,c.last_name
+		,t.list_price 
+		,t.transaction_date 
+		,first_value(t.transaction_date) over (partition by c.first_name, c.last_name order by t.transaction_date::date) as "first_transaction_date"
+	from customer c 
+	inner join transaction t on c.customer_id = t.customer_id)
+where transaction_date = first_transaction_date;
+
+-- 7
+with Intervals as(
+	select c.customer_id
+		,c.first_name
+		,c.last_name
+		,c.job_title
+		,t.transaction_date::date
+		,lead(t.transaction_date::date) over (partition by c.customer_id order by t.transaction_date::date) as "lead_day"
+		,lead(t.transaction_date::date) over (partition by c.customer_id order by t.transaction_date::date) - t.transaction_date::date as "interval_day"
+	from customer c 
+	inner join transaction t on c.customer_id = t.customer_id
+)
+select i.first_name
+	,i.last_name
+	,i.job_title
+	,i.transaction_date::date
+	,i.lead_day
+	,i.interval_day
+from Intervals i
+where i.interval_day = (select max(interval_day) from Intervals);
