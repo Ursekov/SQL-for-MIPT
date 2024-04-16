@@ -1,9 +1,8 @@
-# My SQL homeworks
-From the [Skillfactory Data Science course](https://skillfactory.ru/data-scientist)
+# My SQL projects
 
 ## Проекты
 
-* [Homework 1](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%201)
-* [Homework 2](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%202)
-* [Homework 3](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%203)
-* [Homework 4](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Homework%204)
+* [Project 1](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Project%201)
+* [Project 2](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Project%202)
+* [Project 3](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Project%203)
+* [Project 4](https://github.com/Ursekov/SQL-for-MIPT/tree/master/Project%204)
